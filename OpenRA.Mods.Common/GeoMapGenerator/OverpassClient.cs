@@ -17,6 +17,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using OpenRA.Support;
 
 namespace OpenRA.Mods.Common.GeoMapGenerator
 {
@@ -31,7 +32,17 @@ namespace OpenRA.Mods.Common.GeoMapGenerator
 
 		public OverpassClient(string cacheDirectory = null)
 		{
-			client = new HttpClient();
+			client = HttpClientFactory.Create();
+
+			// overpass-api.de rejects requests that carry no User-Agent with
+			// "406 Not Acceptable", and the OSM usage policy asks for an agent that
+			// identifies the application. HttpClient sends no User-Agent by default.
+			var engineVersion = Uri.EscapeDataString(Game.EngineVersion ?? "unknown");
+			client.DefaultRequestHeaders.Add(
+				"User-Agent",
+				$"OpenRA/{engineVersion} OpenRA-TAK-Support-GeoMapGenerator (+https://github.com/Kruzntat/OpenRA_TAK_Support)");
+			client.DefaultRequestHeaders.Add("Accept", "application/json");
+
 			cacheDir = cacheDirectory ?? Path.Combine(Platform.SupportDir, "geomaps-cache");
 		}
 
@@ -62,9 +73,20 @@ namespace OpenRA.Mods.Common.GeoMapGenerator
 				+ $"way['landuse'='industrial']({bbox});"
 				+ $"way['landuse'='commercial']({bbox});"
 				+ $"relation['natural'='water']({bbox});"
-				+ $");"
-				+ $"(._;>;>;);"
-				+ $"out body qt;";
+				+ ");"
+
+				// Recurse down once to pull in the geometry the matched ways and
+				// relations reference. This was "(._;>;>;)": both ">" run against the
+				// same input set, so the second is an exact duplicate of the first and
+				// only costs server time. Verified against the live API - the two forms
+				// return byte-identical responses, and the single recursion is faster.
+				//
+				// Emitting the recursed elements with "out skel" instead would shave a
+				// further ~6% off the payload, but relation members that fall outside
+				// the bbox would then arrive untagged, and the rasterizer selects ways
+				// by tag. Measured at 10 such ways in a 4km London box. Not worth it.
+				+ "(._;>;);"
+				+ "out body qt;";
 		}
 
 		/// <summary>
@@ -94,7 +116,8 @@ namespace OpenRA.Mods.Common.GeoMapGenerator
 			});
 
 			var response = await client.PostAsync(overpassUrl, content, ct);
-			response.EnsureSuccessStatusCode();
+			if (!response.IsSuccessStatusCode)
+				throw new HttpRequestException(await DescribeFailureAsync(response, overpassUrl, ct));
 
 			onProgress?.Invoke("Reading response...", 40);
 			var json = await response.Content.ReadAsStringAsync(ct);
@@ -115,6 +138,46 @@ namespace OpenRA.Mods.Common.GeoMapGenerator
 
 			onProgress?.Invoke("OSM data received.", 50);
 			return json;
+		}
+
+		/// <summary>
+		/// Turn an Overpass HTTP failure into a message that says what to do about it.
+		/// The default HttpClient message ("Response status code does not indicate
+		/// success") gives the user nothing to act on.
+		/// </summary>
+		static async Task<string> DescribeFailureAsync(HttpResponseMessage response, string url, CancellationToken ct)
+		{
+			var hint = (int)response.StatusCode switch
+			{
+				400 => "The server rejected the query syntax.",
+				406 => "The server rejected the request, usually because of a missing or blocked User-Agent.",
+				429 => "Rate limited. Wait a short while before generating another map.",
+				504 => "The server timed out building the response. A dense urban centre can exceed the "
+					+ "Overpass timeout - retry, or raise OverpassTimeout. The map area is fixed at "
+					+ "~4km by the 512-cell map size and is not the cause.",
+				_ => null
+			};
+
+			var body = string.Empty;
+			try
+			{
+				body = (await response.Content.ReadAsStringAsync(ct)).Trim();
+				if (body.Length > 300)
+					body = body[..300] + "...";
+			}
+			catch (Exception)
+			{
+				// Body is best-effort context only.
+			}
+
+			var message = $"Overpass request to {url} failed: {(int)response.StatusCode} {response.ReasonPhrase}.";
+			if (hint != null)
+				message += " " + hint;
+
+			if (body.Length > 0)
+				message += $" Server said: {body}";
+
+			return message;
 		}
 
 		string GetCachePath(double south, double west, double north, double east, string query)
