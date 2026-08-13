@@ -199,7 +199,7 @@ Container@EDITOR_ROOT:
 	Logic: LoadMapEditorLogic
 	Children:
 		LogicKeyListener@GLOBAL_KEYHANDLER:
-			Logic: MusicHotkeyLogic, ScreenshotHotkeyLogic, MuteHotkeyLogic, EditorQuickSaveHotkeyLogic
+			Logic: MusicHotkeyLogic, ScreenshotHotkeyLogic, MuteHotkeyLogic, EditorQuickSaveHotkeyLogic, DisableUIKeyLogic, DisableAllUIKeyLogic
 				StopMusicKey: StopMusic
 				PauseMusicKey: PauseMusic
 				PrevMusicKey: PrevMusic
@@ -207,6 +207,8 @@ Container@EDITOR_ROOT:
 				TakeScreenshotKey: TakeScreenshot
 				MuteAudioKey: ToggleMute
 				QuickSaveKey: EditorQuickSave
+				DisableUIKey: DisableUserInterface
+				DisableAllUIKey: DisableAllUserInterface
 		LogicKeyListener@WORLD_KEYHANDLER:
 			Logic: ResetZoomHotkeyLogic
 				ResetZoomKey: ResetZoom
@@ -1071,7 +1073,7 @@ Container@MAP_GENERATOR_TOOL_PANEL:
 					Height: 25
 					Text: button-map-generator-generate-random
 					Font: Bold
-		ScrollPanel@SETTINGS_PANEL:
+		ScrollPanel@OPTIONS_PANEL:
 			X: 0
 			Y: 34
 			Width: PARENT_WIDTH
@@ -1189,6 +1191,11 @@ ScrollPanel@TILING_PATH_TOOL_PANEL:
 					MinimumValue: 0
 					MaximumValue: 10
 					Ticks: 11
+		Checkbox@ALLOW_END_DEVIATION:
+			X: 5
+			Width: PARENT_WIDTH - 35
+			Height: 25
+			Text: checkbox-tiling-path-allow-end-deviation
 		Checkbox@CLOSED_LOOPS:
 			X: 5
 			Width: PARENT_WIDTH - 35
