@@ -10,7 +10,11 @@ OpenRA TAK Support is a fork of [OpenRA](https://github.com/OpenRA/OpenRA) that 
 
 ## Quick Start (Build and Play)
 
-<mark>Prerequisite:</mark> [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.414-windows-x64-installer) must be installed.
+<mark>Prerequisite:</mark> [.NET 10.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/10.0) must be installed.
+
+> Or install it from a terminal: `winget install Microsoft.DotNet.SDK.10`
+>
+> The **SDK** is required, not just the runtime — having the .NET 10 runtime alone is not enough to build. An older SDK (9.0 or earlier) fails every project with `error NETSDK1045: The current .NET SDK does not support targeting .NET 10.0`. Check what you have with `dotnet --list-sdks`.
 
 ### For Non-Developers
 
