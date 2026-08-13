@@ -792,3 +792,20 @@ label-bot-player-tooltip-name = Bot
 label-bot-managed-by-tooltip = Bot managed by { $name }
 label-game-admin = Game Admin
 
+## settings-cot.yaml
+label-cot-section-header = Cursor on Target (CoT) Settings
+checkbox-cot-enabled = Enable CoT Broadcasting
+label-cot-mode = Endpoint Mode:
+label-cot-host = Host Address:
+label-cot-port = Port:
+label-cot-ttl = Multicast TTL:
+label-cot-bind-interface = Bind Interface (optional):
+label-cot-bind-interface-desc = Network adapter name to send from (e.g. "Ethernet", "Wi-Fi"). Leave blank for default.
+button-cot-test = Send Test Marker
+
+## CoT Output mode options
+options-cot-mode =
+    .localhost = Localhost (default)
+    .unicast = Unicast
+    .multicast = Multicast
+

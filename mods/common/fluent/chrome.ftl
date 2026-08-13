@@ -424,9 +424,10 @@ label-cot-output-bind-interface = Bind Interface:
 checkbox-cot-output-remember = Remember these settings
 
 ## CoT Output mode options
-options-cot-mode.localhost = Localhost (default)
-options-cot-mode.unicast = Unicast
-options-cot-mode.multicast = Multicast
+options-cot-mode =
+    .localhost = Localhost (default)
+    .unicast = Unicast
+    .multicast = Multicast
 
 ## settings-cot.yaml
 button-panel-cot = Cursor on Target

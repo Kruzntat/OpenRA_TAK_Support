@@ -1170,79 +1170,79 @@
 			BADR: "a-f-A-M-F-C-H"
 			BADR.Bomber: "a-f-A-M-F-B"
 			U2: "a-f-A-M-F-Q-R-Z"
-  		ActorDamageMilsymIds:
-  			MIG:
-  				Undamaged: "SFACMFF---*-***"
+		ActorDamageMilsymIds:
+			MIG:
+				Undamaged: "SFACMFF---*-***"
 				Default: "SFADMFF---*-***"
 				Light: "SFADMFF---*-***"
 				Medium: "SFADMFF---*-***"
 				Heavy: "SFADMFF---*-***"
-  				Critical: "SFADMFF---*-***"
-  				Dead: "SFAXMFF---*-***"
-  			YAK:
-  				Undamaged: "SFACMFP---*-***"
+				Critical: "SFADMFF---*-***"
+				Dead: "SFAXMFF---*-***"
+			YAK:
+				Undamaged: "SFACMFP---*-***"
 				Default: "SFADMFP---*-***"
 				Light: "SFADMFP---*-***"
 				Medium: "SFADMFP---*-***"
 				Heavy: "SFADMFP---*-***"
-  				Critical: "SFADMFP---*-***"
-  				Dead: "SFAXMFP---*-***"
-  			HELI:
-  				Undamaged: "SFACMH----*-***"
+				Critical: "SFADMFP---*-***"
+				Dead: "SFAXMFP---*-***"
+			HELI:
+				Undamaged: "SFACMH----*-***"
 				Default: "SFADMH----*-***"
 				Light: "SFADMH----*-***"
 				Medium: "SFADMH----*-***"
 				Heavy: "SFADMH----*-***"
-  				Critical: "SFADMH----*-***"
-  				Dead: "SFAXMH----*-***"
-  			HIND:
-  				Undamaged: "SFACMH----*-***"
+				Critical: "SFADMH----*-***"
+				Dead: "SFAXMH----*-***"
+			HIND:
+				Undamaged: "SFACMH----*-***"
 				Default: "SFADMH----*-***"
 				Light: "SFADMH----*-***"
 				Medium: "SFADMH----*-***"
 				Heavy: "SFADMH----*-***"
-  				Critical: "SFADMH----*-***"
-  				Dead: "SFAXMH----*-***"
-  			TRAN:
-  				Undamaged: "SFACMH----*-***"
+				Critical: "SFADMH----*-***"
+				Dead: "SFAXMH----*-***"
+			TRAN:
+				Undamaged: "SFACMH----*-***"
 				Default: "SFADMH----*-***"
 				Light: "SFADMH----*-***"
 				Medium: "SFADMH----*-***"
 				Heavy: "SFADMH----*-***"
-  				Critical: "SFADMH----*-***"
-  				Dead: "SFAXMH----*-***"
-  			MH60:
-  				Undamaged: "SFACMHH---*-***"
+				Critical: "SFADMH----*-***"
+				Dead: "SFAXMH----*-***"
+			MH60:
+				Undamaged: "SFACMHH---*-***"
 				Default: "SFADMHH---*-***"
 				Light: "SFADMHH---*-***"
 				Medium: "SFADMHH---*-***"
 				Heavy: "SFADMHH---*-***"
-  				Critical: "SFADMHH---*-***"
-  				Dead: "SFAXMHH---*-***"
-  			BADR:
-  				Undamaged: "SUACMFCH--*-***"
+				Critical: "SFADMHH---*-***"
+				Dead: "SFAXMHH---*-***"
+			BADR:
+				Undamaged: "SUACMFCH--*-***"
 				Default: "SUADMFC---*-***"
 				Light: "SUADMFC---*-***"
 				Medium: "SUADMFC---*-***"
 				Heavy: "SUADMFC---*-***"
-  				Critical: "SUADMFC---*-***"
-  				Dead: "SUAXMFC---*-***"
-  			BADR.Bomber:
-  				Undamaged: "SFACMFB---*-***"
+				Critical: "SUADMFC---*-***"
+				Dead: "SUAXMFC---*-***"
+			BADR.Bomber:
+				Undamaged: "SFACMFB---*-***"
 				Default: "SFADMFB---*-***"
 				Light: "SFADMFB---*-***"
 				Medium: "SFADMFB---*-***"
 				Heavy: "SFADMFB---*-***"
-  				Critical: "SFADMFB---*-***"
-  				Dead: "SFAXMFB---*-***"
-  			U2:
-  				Undamaged: "SUACMFQRZ-*-***"
+				Critical: "SFADMFB---*-***"
+				Dead: "SFAXMFB---*-***"
+			U2:
+				Undamaged: "SUACMFQRZ-*-***"
 				Default: "SUADMFQRZ-*-***"
 				Light: "SUADMFQRZ-*-***"
 				Medium: "SUADMFQRZ-*-***"
 				Heavy: "SUADMFQRZ-*-***"
-  				Critical: "SUADMFQRZ-*-***"
-  				Dead: "SUAXMFQRZ-*-***"
+				Critical: "SUADMFQRZ-*-***"
+				Dead: "SUAXMFQRZ-*-***"
 
 ^Plane:
 	Inherits: ^NeutralPlane
