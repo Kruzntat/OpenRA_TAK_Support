@@ -132,6 +132,7 @@ ChromeLayout:
 	common|chrome/geo-map-generator.yaml
 	common|chrome/replaybrowser.yaml
 	common|chrome/gamesave-browser.yaml
+	common|chrome/load-game-browser.yaml
 	common|chrome/gamesave-loading.yaml
 	common|chrome/text-notifications.yaml
 	d2k|chrome/encyclopedia.yaml
@@ -139,6 +140,7 @@ ChromeLayout:
 FluentMessages:
 	common|fluent/common.ftl
 	common|fluent/chrome.ftl
+	common|fluent/ingame-debug.ftl
 	common|fluent/hotkeys.ftl
 	common|fluent/rules.ftl
 	d2k|fluent/d2k.ftl

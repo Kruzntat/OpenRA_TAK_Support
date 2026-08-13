@@ -124,7 +124,7 @@ end
 AirStrikeTimer = 7500
 AirStrikeChargeTime = 7500
 AirstrikeLogic = function(airstrikeProvider)
-	if airstrikeProvider.IsDead then
+	if airstrikeProvider.IsDead or airstrikeProvider.Owner ~= AtreidesEnemy then
 		return
 	end
 	if DateTime.GameTime <= AirStrikeTimer then
@@ -140,12 +140,11 @@ AirstrikeLogic = function(airstrikeProvider)
 	else
 		AirStrikeVSBuilding(airstrikeProvider)
 		Trigger.AfterDelay(7500, function() AirstrikeLogic(airstrikeProvider) end)
-		IsAirstrikeReady = false
 	end
 end
 
 AirStrikeVSBuilding = function(airstrikeProvider)
-	if airstrikeProvider.IsDead or  DateTime.GameTime < AirStrikeTimer  then
+	if airstrikeProvider.IsDead or DateTime.GameTime < AirStrikeTimer  then
 		return
 	end
 
@@ -217,7 +216,9 @@ BuildSaboteur = function()
 		end)
 
 		SendSaboteur(saboteur)
-		ScanForBetterTargets(saboteur)
+		Trigger.AfterDelay(200, function()
+			ScanForBetterTargets(saboteur)
+		end)
 	end
 
 	Trigger.AfterDelay(DateTime.Minutes(5) + DateTime.Seconds(30), BuildSaboteur)
@@ -253,6 +254,7 @@ ScanForBetterTargets = function(saboteur)
 		local dfd = Utils.Random(possibleTargets)
 		saboteur.Demolish(dfd)
 		saboteur.CallFunc(function()
+			SendSaboteur(saboteur)
 			ScanForBetterTargets(saboteur)
 		end)
 	else
@@ -309,7 +311,7 @@ end
 EmergencyBehaviour = function(player, target)
 	HoldProduction[player] = false
 	if player == Ordos and not AtreidesEnemy.HasNoRequiredUnits() then
-		if AHiTechFactory.IsDead then return end
+		if AHiTechFactory.IsDead or AHiTechFactory.Owner ~= AtreidesEnemy then return end
 		local enemyunits = Map.ActorsInCircle(Map.CenterOfCell(target), WDist.FromCells(15), function(a)
 			return a.Owner == Harkonnen
 				and not a.IsDead
@@ -399,6 +401,7 @@ WorldLoaded = function()
 	end)
 
 	Trigger.OnKilledOrCaptured(OPalace, function()
+		if AtreidesEnemy.HasNoRequiredUnits() then return  end
 		Media.DisplayMessage(UserInterface.GetFluentMessage("cannot-stand-harkonnen-must-become-neutral"), UserInterface.GetFluentMessage("atreides-commander"), HSLColor.FromHex("5A7394"))
 
 		ChangeOwner(AtreidesEnemy, AtreidesNeutral)

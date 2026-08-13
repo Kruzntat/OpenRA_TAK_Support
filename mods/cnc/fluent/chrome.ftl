@@ -82,6 +82,7 @@ label-tiling-path-type-start = Start type
 label-tiling-path-type-inner = Inner type
 label-tiling-path-type-end = End type
 label-tiling-path-deviation = Deviation limit
+checkbox-tiling-path-allow-end-deviation = Allow end point deviation
 checkbox-tiling-path-closed-loops = Loops use only inner types
 button-tiling-path-reverse = Reverse path
 button-tiling-path-reset = Discard path
@@ -121,10 +122,23 @@ label-tool-tiling-path = Path Tiler
 ## encyclopedia.yaml, mainmenu.yaml
 label-encyclopedia-title = EVA Database
 
+## load-game-browser.yaml
+label-load-game-browser-panel-title = Load Game
+label-load-game-browser-panel-choose-save = Choose Save
+label-load-game-browser-panel-incompatible-title = Incompatible Savegame
+label-load-game-browser-panel-incompatible-a = This savegame is not compatible
+label-load-game-browser-panel-incompatible-b = with this version of OpenRA
+label-load-game-browser-panel-human-player = Player
+button-load-game-browser-panel-load = Load
+tooltip-savegame-date-created = Date Created
+tooltip-savegame-map = Map
+tooltip-savegame-duration = Duration
+tooltip-savegame-players = Number of players
+
 ## gamesave-browser.yaml
 label-gamesave-browser-panel-load-title = Load game
-label-gamesave-browser-panel-save-title = Save game
-label-bg-title = [CREATE NEW FILE]
+label-gamesave-browser-panel-save-title = Save Game
+label-gamesave-browser-panel-no-save-selected = Select a savegame to overwrite it or type a new savegame name
 button-bg-delete-all = Delete All
 button-bg-delete = Delete
 button-bg-rename = Rename
@@ -139,27 +153,6 @@ label-gamesave-loading-screen-desc = Press Escape to cancel loading and return t
 button-chat-chrome-mode =
     .label = Team
     .tooltip = Toggle chat mode
-
-## ingame-debug.yaml
-label-debug-panel-title = Debug Options
-checkbox-debug-panel-instant-build = Instant Build Speed
-checkbox-debug-panel-enable-tech = Build Everything
-checkbox-debug-panel-build-anywhere = Build Anywhere
-checkbox-debug-panel-unlimited-power = Unlimited Power
-checkbox-debug-panel-instant-charge = Instant Charge Time
-checkbox-debug-panel-disable-visibility-checks = Disable Visibility Checks
-button-debug-panel-give-cash = Give $20,000
-button-debug-panel-grow-resources = Grow Resources
-button-debug-panel-give-exploration = Clear Shroud
-button-debug-panel-reset-exploration = Reset Shroud
-label-debug-panel-visualizations-title = Visualizations
-checkbox-debug-panel-show-unit-paths = Show Unit Paths
-checkbox-debug-panel-show-customterrain-overlay = Show Custom Terrain
-checkbox-debug-panel-show-actor-tags = Show Actor Tags
-checkbox-debug-panel-show-combatoverlay = Show Combat Geometry
-checkbox-debug-panel-show-geometry = Show Render Geometry
-checkbox-debug-panel-show-terrain-overlay = Show Terrain Geometry
-checkbox-debug-panel-show-screenmap = Show Screen Map
 
 ## ingame-debug-hpf.yaml
 dropdownbutton-hpf-overlay-locomotor = Select Locomotor
@@ -387,6 +380,8 @@ button-map-update-download-available-install = Install Map
 label-map-preview-searching = Searching OpenRA Resource Center...
 label-map-unavailable-a = This map was not found on the
 label-map-unavailable-b = OpenRA Resource Center
+label-map-generation-error-a = This map was generated with an
+label-map-generation-error-b = incompatible version
 label-map-preview-error = An error occurred during installation
 label-map-update-available-a = A new version of the map
 label-map-update-available-b = was found on your computer
@@ -504,7 +499,7 @@ checkbox-edgescroll-container = Screen Edge Panning
 
 ## mainmenu.yaml
 label-singleplayer-title = Singleplayer
-label-main-menu-mainmenu-title = Main Menu
+label-main-menu-title = Main Menu
 button-extras-title = Extras
 button-main-menu-content = Manage Content
 button-singleplayer-menu-skirmish = Skirmish
@@ -615,26 +610,20 @@ label-bg-port = Port:
 button-directconnect-panel-join = Join
 
 ## playerprofile.yaml
-button-profile-header-logout = Logout
-label-generate-keys-desc-a = Connect to a forum account to identify
-label-generate-keys-desc-b = yourself to other players, join private
-label-generate-keys-desc-c = servers, and display badges.
-button-generate-keys-key = Connect to an OpenRA forum account
-label-generating-keys-desc-a = Generating authentication key pair.
-label-generating-keys-desc-b = This will take several seconds...
-label-register-fingerprint-desc-a = An authentication key has been copied to your
-label-register-fingerprint-desc-b = clipboard. Add this to your User Control Panel
-label-register-fingerprint-desc-c = on the OpenRA forum then press Continue.
+label-profile-link-desc-a = Link to a forum account to identify
+label-profile-link-desc-b = yourself to other players, join private
+label-profile-link-desc-c = servers, and display badges.
+button-profile-link = Link to an OpenRA forum account
+button-profile-unlink = Unlink
 label-checking-fingerprint-desc-a = Querying account details from
 label-checking-fingerprint-desc-b = the OpenRA forum...
-label-fingerprint-not-found-desc-a = Your authentication key is not connected
-label-fingerprint-not-found-desc-b = to an OpenRA forum account.
 label-connection-error-desc-a = Failed to connect to the OpenRA forum.
 label-connection-error-desc-b = Please check your internet connection.
 
 ## replaybrowser.yaml
 label-replaybrowser-panel-title = Replay Viewer
 label-filters-title = Filter
+label-filters-flt-name-desc = Name:
 label-filters-flt-gametype-desc = Type:
 dropdownbutton-filters-any = Any
 label-filters-flt-date-desc = Date:
@@ -649,6 +638,7 @@ label-management-manage-title = Manage
 button-management-mng-rensel = Rename
 button-management-mng-delsel = Delete
 button-management-mng-delall = Delete All
+checkbox-load-game-filters = Filters
 label-replay-list-container-replaybrowser-title = Choose Replay
 button-replaybrowser-panel-watch = Watch
 
@@ -693,6 +683,34 @@ label-auto-save-interval = Auto-save frequency:
 label-auto-save-max-file-number = Auto-save limit:
 checkbox-hide-replay-chat-container = Hide Chat in Replays
 
+label-forum-profile-section-header = OpenRA Forum Account
+label-forum-profile-description = Link a forum account to identify yourself to other players, join private servers, and display badges.
+label-forum-profile-checking-fingerprint = Querying account details from the OpenRA forum...
+label-forum-profile-connection-error = Failed to connect to the OpenRA forum.
+
+label-forum-profile-result-unlinked =
+   Your password is used to add an authentication key
+   to your OpenRA forum account. It will not be saved.
+label-forum-profile-result-linked =
+   Authentication keys can be managed and revoked
+   from your User Control Panel on the OpenRA forum.
+label-forum-profile-result-auth-failure =
+   Authentication failed. Please check your username
+   and password and try again.
+label-forum-profile-result-login-attempts =
+   You have exceeded the allowed number of login
+   attempts. Please try again later.
+label-forum-profile-result-banned = You have been banned from the OpenRA forum.
+label-forum-profile-result-connection-failed = Failed to connect to the OpenRA forum.
+label-forum-profile-result-error = An error has occurred. Please try again.
+
+label-forum-profile-username = Username:
+label-forum-profile-password = Password:
+button-forum-profile-link = Link Account
+button-forum-profile-unlink = Unlink Account
+button-forum-profile-retry = Retry
+button-forum-visit-forum = Visit Forum
+
 ## settings-display.yaml
 label-target-lines-dropdown-container = Target Lines:
 label-status-bar-dropdown-container-bars = Status Bars:
@@ -714,6 +732,8 @@ label-video-mode-dropdown-container = Video Mode:
 dropdownbutton-video-mode-dropdown-container = Windowed
 label-window-resolution-container-size = Window Size:
 label-window-resolution-container-x = x
+label-resolution-preset = Presets:
+dropdownbutton-resolution-select-preset = Select a preset
 label-display-selection-container = Select Display:
 dropdownbutton-display-selection-container-dropdown = Standard
 checkbox-vsync-container = Enable VSync
