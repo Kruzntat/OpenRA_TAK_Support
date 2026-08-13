@@ -58,7 +58,11 @@ namespace OpenRA.Mods.Common.GeoMapGenerator
 
 		// Overpass API
 		public string OverpassUrl { get; set; } = "https://overpass-api.de/api/interpreter";
-		public int OverpassTimeout { get; set; } = 60;
+		/// <summary>
+		/// Server-side Overpass timeout in seconds. A 4km box over a dense urban centre
+		/// can take well over half a minute to assemble, so 60 was marginal.
+		/// </summary>
+		public int OverpassTimeout { get; set; } = 90;
 
 		// Map metadata
 		public string Title { get; set; }
